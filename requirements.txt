@@ -1,0 +1,9 @@
+llama-index==0.14.1
+llama-index-llms-gemini==0.6.1
+llama-index-embeddings-google-genai==0.3.1
+llama-index-vector-stores-pinecone==0.7.1
+google-generativeai==0.8.5
+python-dotenv==1.1.1
+pinecone-client==2.2.1
+pypdf==6.0.0
+python-pdf==0.40
