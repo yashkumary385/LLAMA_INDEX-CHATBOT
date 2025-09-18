@@ -45,10 +45,11 @@ storage_context=storage_context,
 embed_model=embed_model)
 
 
-llm = Gemini(model_name="gemini-1.5-flash",
-             generation_config={
-                 "max_output_tokens":500
-             })
+llm = Gemini(model_name="gemini-2.5-flash",
+            #  generation_config={
+            #      "max_output_tokens":256
+            #  }
+             )
 
 from llama_index.core.response_synthesizers import get_response_synthesizer
 response_synthesizer = get_response_synthesizer(llm=llm)
