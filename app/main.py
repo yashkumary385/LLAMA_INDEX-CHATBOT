@@ -72,5 +72,7 @@ def working():
 
 @app.post("/query")
 def query(req : QuerySchema):
+    print(req.query)
     response = query_engine.query(req.query)
+    # print(response.response)
     return {"answer":response.response}
