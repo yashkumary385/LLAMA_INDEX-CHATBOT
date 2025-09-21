@@ -1,0 +1,17 @@
+credentials:
+ usernames:
+   john doe:
+    email:john@example.com
+    name:john
+    password:abc
+   peter:
+    email:peter@example.com
+    name:peter
+    password:def
+cookie:
+  expiry_days:  30
+  key: "abcdef"
+  name: "streamlit_app"
+preauthorized:
+  emails:
+  - melsby@gmail.com

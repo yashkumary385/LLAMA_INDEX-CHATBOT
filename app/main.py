@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI
+from fastapi import FastAPI,UploadFile,File
 from pydantic import BaseModel
  
 app = FastAPI()
@@ -15,7 +15,7 @@ from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.embeddings.google_genai import GoogleGenAIEmbedding
 from llama_index.llms.gemini import Gemini
 from pinecone import Pinecone
-from llama_index.core import VectorStoreIndex,StorageContext
+from llama_index.core import VectorStoreIndex,StorageContext,SimpleDirectoryReader
 load_dotenv()
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 
@@ -76,3 +76,19 @@ def query(req : QuerySchema):
     response = query_engine.query(req.query)
     # print(response.response)
     return {"answer":response.response}
+
+@app.post("/file")
+async def upload_file(file : UploadFile ):
+       print(file.filename)
+
+       file_path = file.filename
+       with open(file.filename, "wb") as f:
+        f.write(await file.read())
+
+       docs = SimpleDirectoryReader(input_files=[file_path]).load_data()
+    #    vector_store = PineconeVectorStore(pinecone_index=pinecone_index)
+       index = VectorStoreIndex.from_documents(docs,embed_model=embed_model,storage_context=storage_context) # save the docs into the storage context 
+    #    print(docs)
+
+
+       return {"message": f"File {file.filename} uploaded & indexed!"}
